@@ -1,0 +1,122 @@
+[
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/unittests.cpp.o -c /vagrant/unittests.cpp",
+  "file": "/vagrant/unittests.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/event_test.cpp.o -c /vagrant/event_test.cpp",
+  "file": "/vagrant/event_test.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/instrument_test.cpp.o -c /vagrant/instrument_test.cpp",
+  "file": "/vagrant/instrument_test.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/midi_test.cpp.o -c /vagrant/midi_test.cpp",
+  "file": "/vagrant/midi_test.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/signal_test.cpp.o -c /vagrant/signal_test.cpp",
+  "file": "/vagrant/signal_test.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/synthesizer_test.cpp.o -c /vagrant/synthesizer_test.cpp",
+  "file": "/vagrant/synthesizer_test.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/track_test.cpp.o -c /vagrant/track_test.cpp",
+  "file": "/vagrant/track_test.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/wav_test.cpp.o -c /vagrant/wav_test.cpp",
+  "file": "/vagrant/wav_test.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/event.cpp.o -c /vagrant/event.cpp",
+  "file": "/vagrant/event.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/track.cpp.o -c /vagrant/track.cpp",
+  "file": "/vagrant/track.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/midi.cpp.o -c /vagrant/midi.cpp",
+  "file": "/vagrant/midi.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/signal.cpp.o -c /vagrant/signal.cpp",
+  "file": "/vagrant/signal.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/instrument.cpp.o -c /vagrant/instrument.cpp",
+  "file": "/vagrant/instrument.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/synthesizer.cpp.o -c /vagrant/synthesizer.cpp",
+  "file": "/vagrant/synthesizer.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -g -O0 -fprofile-arcs -ftest-coverage -std=gnu++11 -o CMakeFiles/unittests.dir/wav.cpp.o -c /vagrant/wav.cpp",
+  "file": "/vagrant/wav.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synth.dir/main.cpp.o -c /vagrant/main.cpp",
+  "file": "/vagrant/main.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synthesizer.dir/event.cpp.o -c /vagrant/event.cpp",
+  "file": "/vagrant/event.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synthesizer.dir/track.cpp.o -c /vagrant/track.cpp",
+  "file": "/vagrant/track.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synthesizer.dir/midi.cpp.o -c /vagrant/midi.cpp",
+  "file": "/vagrant/midi.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synthesizer.dir/signal.cpp.o -c /vagrant/signal.cpp",
+  "file": "/vagrant/signal.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synthesizer.dir/instrument.cpp.o -c /vagrant/instrument.cpp",
+  "file": "/vagrant/instrument.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synthesizer.dir/synthesizer.cpp.o -c /vagrant/synthesizer.cpp",
+  "file": "/vagrant/synthesizer.cpp"
+},
+{
+  "directory": "/vagrant",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/synthesizer.dir/wav.cpp.o -c /vagrant/wav.cpp",
+  "file": "/vagrant/wav.cpp"
+},
+{
+  "directory": "/vagrant/tests",
+  "command": "/usr/bin/c++    -I/vagrant    -std=gnu++11 -o CMakeFiles/compare.dir/compare.cpp.o -c /vagrant/tests/compare.cpp",
+  "file": "/vagrant/tests/compare.cpp"
+}
+]

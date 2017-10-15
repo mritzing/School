@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Coverage.combined.cleaned - /vagrant/event.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">vagrant</a> - event.hpp<span style="font-size: 80%;"> (source / <a href="event.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Coverage.combined.cleaned</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-10-09 23:35:25</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef EVENT_HPP</a>
+<span class="lineNum">       2 </span>            : #define EVENT_HPP
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &lt;cstdint&gt;
+<span class="lineNum">       5 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">       6 </span>            : /** A TempoEvent. This event indicates that a change in the tempo should occur
+<span class="lineNum">       7 </span>            :  * on the next MIDI tick.
+<span class="lineNum">       8 </span>            :  */
+<span class="lineNum">       9 </span>            : class TempoEvent {
+<span class="lineNum">      10 </span>            : public:
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            :         /** Construct a TempoEvent. The default tempo is 120 bpm
+<span class="lineNum">      13 </span>            :          */
+<span class="lineNum">      14 </span>            :         TempoEvent(intmax_t t = 500000);
+<span class="lineNum">      15 </span>            :         ~TempoEvent();
+<span class="lineNum">      16 </span>            :         /** Get the tempo in micro-sec per beat.
+<span class="lineNum">      17 </span>            :          */
+<span class="lineNum">      18 </span>            :         intmax_t getTempo() const;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            : private:
+<span class="lineNum">      21 </span>            :         intmax_t tempo;
+<span class="lineNum">      22 </span>            : };
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span>            : /** An EndTrackEvent. This event indicates that the track has ended and the
+<span class="lineNum">      25 </span>            :  * synthesizer should halt sampling the instrument.
+<span class="lineNum">      26 </span>            :  */
+<span class="lineNum">      27 </span>            : class EndTrackEvent {};
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : /** A NoteEvent. This event indicates that a note should be activated
+<span class="lineNum">      30 </span>            :  * or deactivated.
+<span class="lineNum">      31 </span>            :  */
+<span class="lineNum">      32 </span>            : class NoteEvent {
+<span class="lineNum">      33 </span>            : public:
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span>            :         /** You cannot default construct a Note Event. */
+<span class="lineNum">      36 </span>            :         NoteEvent() = delete;
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span>            :         /** Construct a note event.
+<span class="lineNum">      39 </span>            :          * \param on true if the note should be turned on, false if it should be
+<span class="lineNum">      40 </span>            :          *           turned off.
+<span class="lineNum">      41 </span>            :          * \param notenum the MIDI note number (0-127) to be modified.
+<span class="lineNum">      42 </span>            :          * \param notevelocity the velocity of the note change.
+<span class="lineNum">      43 </span>            :          */
+<span class="lineNum">      44 </span>            :         NoteEvent(bool on, int8_t notenum, int8_t notevelocity);
+<span class="lineNum">      45 </span>            :         ~NoteEvent();
+<span class="lineNum">      46 </span>            :         /** Get note change type. true if ON, false if OFF.
+<span class="lineNum">      47 </span>            :          */
+<span class="lineNum">      48 </span>            :         bool getNoteOn();
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span>            :         /** Get MIDI note number to change. Takes on values in [0,127]
+<span class="lineNum">      51 </span>            :          */
+<span class="lineNum">      52 </span>            :         int8_t getNoteNumber() const;
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            :         /** Get the velocity of the note change.
+<span class="lineNum">      55 </span>            :          */
+<span class="lineNum">      56 </span>            :         int8_t getNoteVelocity() const;
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            : private:
+<span class="lineNum">      59 </span>            :         bool on_;
+<span class="lineNum">      60 </span>            :         int8_t notenum_;
+<span class="lineNum">      61 </span>            :         int8_t notevelocity_;
+<span class="lineNum">      62 </span>            : };
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            : /** A MIDI Event holds one of a TempoEvent, EndTrackEvent, or NoteEvent and an
+<span class="lineNum">      65 </span>            :  * associated MIDI tick time in units of ticks-per-beat.
+<span class="lineNum">      66 </span>            :  */
+<span class="lineNum">      67 </span>            : class MIDIEvent {
+<span class="lineNum">      68 </span>            : public:
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span>            :         /** Construct a MIDI event holding a TempEvent at ticktime.
+<span class="lineNum">      72 </span>            :          */
+<span class="lineNum">      73 </span>            :         MIDIEvent(TempoEvent e, intmax_t ticktime);
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span>            :         /** Construct a MIDI event holding an EndTrackEvent at ticktime.
+<span class="lineNum">      76 </span>            :          */
+<span class="lineNum">      77 </span>            :         MIDIEvent(EndTrackEvent e, intmax_t ticktime);
+<span class="lineNum">      78 </span>            : 
+<span class="lineNum">      79 </span>            :         /** Construct a MIDI event holding a NoteEvent at ticktime.
+<span class="lineNum">      80 </span>            :          */
+<span class="lineNum">      81 </span>            :         MIDIEvent(NoteEvent e, intmax_t ticktime);
+<span class="lineNum">      82 </span>            :         ~MIDIEvent();
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span>            :         /** True if event is a TempoEvent, else false.
+<span class="lineNum">      85 </span>            :          */
+<span class="lineNum">      86 </span>            :         bool isTempoEvent() const;
+<span class="lineNum">      87 </span>            : 
+<span class="lineNum">      88 </span>            :         /** True if event is an EndTrackEvent, else false.
+<span class="lineNum">      89 </span>            :          */
+<span class="lineNum">      90 </span>            :         bool isEndTrackEvent() const;
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span>            :         /** True if event is a NoteEvent, else false.
+<span class="lineNum">      93 </span>            :          */
+<span class="lineNum">      94 </span>            :         bool isNoteEvent() const;
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            :         /** Get the MIDI tick time of this event (ticks per beat)
+<span class="lineNum">      97 </span>            :          */
+<span class="lineNum">      98 </span>            :         intmax_t getTickTime() const;
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :         /** Cast the MIDI event as a TempoEvent. Only valid if
+<span class="lineNum">     101 </span>            :          * isTempoEvent() returns true.
+<span class="lineNum">     102 </span>            :          */
+<span class="lineNum">     103 </span>            :         TempoEvent asTempoEvent() const;
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span>            :         /** Cast the MIDI event as a NoteEvent. Only valid if
+<span class="lineNum">     106 </span>            :          * isNoteEvent() returns true.
+<span class="lineNum">     107 </span>            :          */
+<span class="lineNum">     108 </span>            :         NoteEvent asNoteEvent() const;
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span>            : private:
+<span class="lineNum">     111 </span>            :         enum EventType { tempoEventType, endTrackEventType, noteEventType } eventType;
+<span class="lineNum">     112 </span>            :         union eventUnion_t {
+<span class="lineNum">     113 </span>            :                 TempoEvent tempoEvent_;
+<a name="114"><span class="lineNum">     114 </span>            :                 EndTrackEvent endTrackEvent_;</a>
+<a name="115"><span class="lineNum">     115 </span>            :                 NoteEvent noteEvent_;</a>
+<span class="lineNum">     116 </span><span class="lineCov">      11150 :                 eventUnion_t() { EndTrackEvent(); };</span>
+<span class="lineNum">     117 </span><span class="lineCov">      33420 :                 ~eventUnion_t() {}</span>
+<span class="lineNum">     118 </span>            :         } eventUnion;
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            :         intmax_t ticktime_;
+<span class="lineNum">     121 </span>            : };
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

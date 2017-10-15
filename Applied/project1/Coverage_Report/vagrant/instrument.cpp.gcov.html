@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Coverage.combined.cleaned - /vagrant/instrument.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">vagrant</a> - instrument.cpp<span style="font-size: 80%;"> (source / <a href="instrument.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Coverage.combined.cleaned</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">96</td>
+            <td class="headerCovTableEntryLo">1.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-10-09 23:35:25</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryLo">25.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;instrument.hpp&quot;</a>
+<a name="2"><span class="lineNum">       2 </span>            : </a>
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span><span class="lineNoCov">          0 : DefaultInstrument::DefaultInstrument(const Track &amp; track)</span>
+<span class="lineNum">       5 </span>            : {
+<span class="lineNum">       6 </span><span class="lineNoCov">          0 :         track_ = track;</span>
+<span class="lineNum">       7 </span><span class="lineNoCov">          0 :         halted_ = false;</span>
+<span class="lineNum">       8 </span><span class="lineNoCov">          0 :         numSamples = 0;</span>
+<span class="lineNum">       9 </span><span class="lineNoCov">          0 :         currentTempo = 500000;</span>
+<a name="10"><span class="lineNum">      10 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineNoCov">          0 : DefaultInstrument::~DefaultInstrument()</span>
+<span class="lineNum">      13 </span>            : {
+<span class="lineNum">      14 </span><span class="lineNoCov">          0 :         currentEvents.clear();</span>
+<a name="15"><span class="lineNum">      15 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 : bool DefaultInstrument::halted()</span>
+<span class="lineNum">      18 </span>            : {
+<span class="lineNum">      19 </span><span class="lineNoCov">          0 :         return halted_;</span>
+<span class="lineNum">      20 </span>            : }
+<a name="21"><span class="lineNum">      21 </span>            : </a>
+<span class="lineNum">      22 </span>            : //actually just passing in sample rate for deltaT realtime calculated on first line
+<span class="lineNum">      23 </span><span class="lineNoCov">          0 : double DefaultInstrument::sample(double deltaT)</span>
+<span class="lineNum">      24 </span>            : {
+<span class="lineNum">      25 </span><span class="lineNoCov">          0 :         double currentTime = numSamples / deltaT;</span>
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :         double noteSample = 0;</span>
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :         auto it = track_.begin();</span>
+<span class="lineNum">      28 </span><span class="lineNoCov">          0 :         bool passedCurrTime = false;</span>
+<span class="lineNum">      29 </span>            :         //process event from track 
+<span class="lineNum">      30 </span><span class="lineNoCov">          0 :         while (track_.emptyList() || passedCurrTime) {</span>
+<span class="lineNum">      31 </span><span class="lineNoCov">          0 :                 double timeOn = it-&gt;getTickTime();</span>
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            :                 //realtime calc
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :                 timeOn = (it-&gt;getTickTime()*currentTempo) / (pow(10, 6)* track_.getTicksPerBeat());</span>
+<span class="lineNum">      35 </span>            :                 //attempts to process current events
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :                 if (timeOn &gt; currentTime) {</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :                         passedCurrTime = true;</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :                         break;</span>
+<span class="lineNum">      39 </span>            :                 }
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :                 if (it-&gt;isNoteEvent()) {</span>
+<span class="lineNum">      42 </span>            :                         noteStruct note_;
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :                         NoteEvent e = it-&gt;asNoteEvent();</span>
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span><span class="lineNoCov">          0 :                         if (e.getNoteOn()) {</span>
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :                                 note_.velocity = e.getNoteVelocity();</span>
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :                                 note_.duration = .25; //default note length</span>
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :                                 note_.timeTurnedOn = timeOn;</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :                                 currentEvents[e.getNoteNumber()] = note_;</span>
+<span class="lineNum">      50 </span>            :                         }//if note off remove note from current note map
+<span class="lineNum">      51 </span>            :                         else {
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :                                 currentEvents.erase(e.getNoteNumber());</span>
+<span class="lineNum">      53 </span>            :                         }
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :                         it++;</span>
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :                         track_.popEvent();</span>
+<span class="lineNum">      56 </span>            :                 }
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :                 if (it-&gt;isTempoEvent()) {</span>
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :                         TempoEvent e = it-&gt;asTempoEvent();</span>
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :                         currentTempo = e.getTempo();</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :                         it++;</span>
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :                         track_.popEvent();</span>
+<span class="lineNum">      62 </span>            :                 }
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :                 if (it-&gt;isEndTrackEvent()) {</span>
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :                         endTrackTime = timeOn; //maybe dont need this</span>
+<span class="lineNum">      65 </span>            :                         //do halted here
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :                         halted_ = true;</span>
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :                         it++;</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :                         track_.popEvent();</span>
+<span class="lineNum">      69 </span>            :                 }
+<span class="lineNum">      70 </span>            :         }
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :         if (!halted_) {</span>
+<span class="lineNum">      72 </span>            :                 //iterate through notes when getting to a noteevent play for .25s 
+<span class="lineNum">      73 </span>            :                 //check current notes
+<span class="lineNum">      74 </span>            :                 double currNote;
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :                 for (std::map &lt; int8_t, noteStruct&gt;::iterator it_ = currentEvents.begin(); it_ != currentEvents.end(); ++it_) {</span>
+<span class="lineNum">      76 </span><span class="lineNoCov">          0 :                         currNote = 200 * it_-&gt;second.velocity * envelope(currentTime - it_-&gt;second.timeTurnedOn) * sin(2 * PI_ * convertFreq(it_-&gt;first) * currentTime);</span>
+<span class="lineNum">      77 </span><span class="lineNoCov">          0 :                         noteSample += currNote;</span>
+<span class="lineNum">      78 </span>            :                 }
+<span class="lineNum">      79 </span>            :         }
+<span class="lineNum">      80 </span>            : 
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 :         if (halted_) {</span>
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :                 noteSample = 0;</span>
+<span class="lineNum">      83 </span>            :         }
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :         numSamples++;</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :         return noteSample;</span>
+<span class="lineNum">      86 </span>            :         
+<span class="lineNum">      87 </span>            : }
+<a name="88"><span class="lineNum">      88 </span>            : </a>
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 : double DefaultInstrument::envelope(double t)</span>
+<span class="lineNum">      91 </span>            : {
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :         double val = 0.0;</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :         if (0 &lt;= t &amp;&amp; t &lt;= 0.25) {</span>
+<span class="lineNum">      94 </span><span class="lineNoCov">          0 :                 val = t / .25;</span>
+<span class="lineNum">      95 </span>            :         }
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :         else if (.25 &lt; t &amp;&amp; t &lt;= .45) {</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :                 val = 1 - (t - .25);</span>
+<span class="lineNum">      98 </span>            :         }
+<span class="lineNum">      99 </span><span class="lineNoCov">          0 :         else if (.45 &lt; t &amp;&amp; t &lt;= .8) {</span>
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :                 val = .8;</span>
+<span class="lineNum">     101 </span>            :         }
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :         else if (.8 &lt; t &amp;&amp; t &lt;= 1) {</span>
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :                 val = .8 - 4 * (t - .8);</span>
+<span class="lineNum">     104 </span>            :         }
+<span class="lineNum">     105 </span>            :         else {
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :                 val = 0.0;</span>
+<span class="lineNum">     107 </span>            :         }
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :         return val;</span>
+<a name="109"><span class="lineNum">     109 </span>            : }</a>
+<span class="lineNum">     110 </span>            : 
+<span class="lineNum">     111 </span><span class="lineNoCov">          0 : double DefaultInstrument::convertFreq(int8_t index)</span>
+<span class="lineNum">     112 </span>            : {//
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :         int note = index % 12;</span>
+<span class="lineNum">     114 </span><span class="lineNoCov">          0 :         double frequency = 0.0;</span>
+<span class="lineNum">     115 </span><span class="lineNoCov">          0 :         switch (note) {</span>
+<span class="lineNum">     116 </span>            :         case 0:
+<span class="lineNum">     117 </span><span class="lineNoCov">          0 :                 frequency = 26.163;</span>
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     119 </span>            :         case 1:
+<span class="lineNum">     120 </span><span class="lineNoCov">          0 :                 frequency = 27.718;</span>
+<span class="lineNum">     121 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     122 </span>            :         case 2:
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 :                 frequency = 29.366;</span>
+<span class="lineNum">     124 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     125 </span>            :         case 3:
+<span class="lineNum">     126 </span><span class="lineNoCov">          0 :                 frequency = 31.113;</span>
+<span class="lineNum">     127 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     128 </span>            :         case 4:
+<span class="lineNum">     129 </span><span class="lineNoCov">          0 :                 frequency = 32.963;</span>
+<span class="lineNum">     130 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     131 </span>            :         case 5:
+<span class="lineNum">     132 </span><span class="lineNoCov">          0 :                 frequency = 34.963;</span>
+<span class="lineNum">     133 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     134 </span>            :         case 6:
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :                 frequency = 36.9994;</span>
+<span class="lineNum">     136 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     137 </span>            :         case 7:
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :                 frequency = 39.20;</span>
+<span class="lineNum">     139 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     140 </span>            :         case 8:
+<span class="lineNum">     141 </span><span class="lineNoCov">          0 :                 frequency = 41.5305;</span>
+<span class="lineNum">     142 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     143 </span>            :         case 9:
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 :                 frequency = 44.00;</span>
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     146 </span>            :         case 10:
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 :                 frequency = 46.6164;</span>
+<span class="lineNum">     148 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     149 </span>            :         case 11:
+<span class="lineNum">     150 </span><span class="lineNoCov">          0 :                 frequency = 49.388;</span>
+<span class="lineNum">     151 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     152 </span>            :         default:
+<span class="lineNum">     153 </span><span class="lineNoCov">          0 :                 frequency = 0;</span>
+<span class="lineNum">     154 </span><span class="lineNoCov">          0 :                 break;</span>
+<span class="lineNum">     155 </span>            :         }
+<span class="lineNum">     156 </span><span class="lineNoCov">          0 :         int x = (index - note) / 12;</span>
+<span class="lineNum">     157 </span>            :         //frequency = base note * 2^number of octaves above base index (index - mod12)/12
+<a name="158"><span class="lineNum">     158 </span><span class="lineNoCov">          0 :         frequency = frequency * pow(2, x);</span></a>
+<span class="lineNum">     159 </span><span class="lineNoCov">          0 :         return frequency;</span>
+<span class="lineNum">     160 </span><span class="lineCov">          3 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

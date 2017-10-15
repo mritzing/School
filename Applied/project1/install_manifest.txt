@@ -1,0 +1,3 @@
+/vagrant/bin/synth
+/vagrant/bin/unittests
+/vagrant/bin/compare

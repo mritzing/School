@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Coverage.combined.cleaned - /vagrant/track.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">vagrant</a> - track.hpp<span style="font-size: 80%;"> (source / <a href="track.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Coverage.combined.cleaned</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-10-09 23:35:25</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef TRACK_HPP</a>
+<span class="lineNum">       2 </span>            : #define TRACK_HPP
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &lt;list&gt;
+<span class="lineNum">       5 </span>            : #include &lt;forward_list&gt;
+<span class="lineNum">       6 </span>            : #include &quot;event.hpp&quot;
+<span class="lineNum">       7 </span>            : #include &lt;iostream&gt;
+<span class="lineNum">       8 </span>            : /** A Track represents a sequence of Events ordered by thier MIDI tock time.
+<span class="lineNum">       9 </span>            :  * Events can be added to the Track based on type of event. Events can be accessed
+<a name="10"><span class="lineNum">      10 </span>            :  * using a constant iterator in order, first to last.</a>
+<span class="lineNum">      11 </span>            :  */
+<span class="lineNum">      12 </span><span class="lineCov">          5 : class Track {</span>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span>            : public:
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span>            :         /** Typdef for iterator type. This object should support the operators
+<span class="lineNum">      17 </span>            :          * ++, *, and -&gt; (i.e. it is a forward iterator).
+<span class="lineNum">      18 </span>            :          */
+<span class="lineNum">      19 </span>            :          // TODO typedef ????? ConstIteratorType;
+<span class="lineNum">      20 </span>            :         typedef std::forward_list&lt;MIDIEvent&gt;::const_iterator ConstIteratorType;
+<span class="lineNum">      21 </span>            : public:
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span>            :         /** Construct Track with ticks per beat in microsec.
+<span class="lineNum">      24 </span>            :          * default is 120 BPM = 0.5 sec per beat = 500000 microsec per beat
+<span class="lineNum">      25 </span>            :          */
+<span class="lineNum">      26 </span>            :         Track(intmax_t ticks_per_beat = 500000);
+<span class="lineNum">      27 </span>            :         ~Track();
+<span class="lineNum">      28 </span>            :         /** Get ticks per beat in microsec. */
+<span class="lineNum">      29 </span>            :         intmax_t getTicksPerBeat() const;
+<a name="30"><span class="lineNum">      30 </span>            : </a>
+<span class="lineNum">      31 </span>            :         /** Get iterator to first event. */
+<span class="lineNum">      32 </span><span class="lineCov">         60 :         ConstIteratorType begin() const </span>
+<span class="lineNum">      33 </span>            :         {
+<span class="lineNum">      34 </span><span class="lineCov">         60 :                 ConstIteratorType it;</span>
+<span class="lineNum">      35 </span><span class="lineCov">         60 :                 it = eventList.begin();</span>
+<span class="lineNum">      36 </span><span class="lineCov">         60 :                 return it;</span>
+<span class="lineNum">      37 </span>            :         }
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            :         /** Get iterator to end of event sequence. */
+<span class="lineNum">      40 </span>            :         ConstIteratorType end() const 
+<span class="lineNum">      41 </span>            :         {
+<span class="lineNum">      42 </span>            :                 ConstIteratorType it;
+<span class="lineNum">      43 </span>            :                 it = eventList.end();
+<span class="lineNum">      44 </span>            :                 return it;
+<span class="lineNum">      45 </span>            :         }
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            :         /** Add an EndEvent to the track sequence.
+<span class="lineNum">      48 </span>            :          * \param tick_time, the MIDI tick time of the event.
+<span class="lineNum">      49 </span>            :          */
+<span class="lineNum">      50 </span>            :         void addEndEvent(intmax_t tick_time);
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            :         /** Add a TempoEvent to the track sequence.
+<span class="lineNum">      53 </span>            :          * \param tempo the new tempo of the track after this tick
+<span class="lineNum">      54 </span>            :          * \param tick_time the MIDI tick time of the event.
+<span class="lineNum">      55 </span>            :          */
+<span class="lineNum">      56 </span>            :         void addTempoEvent(intmax_t tempo, intmax_t tick_time);
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            :         /** Add a NoteEvent to the track sequence.
+<span class="lineNum">      59 </span>            :          * \param code the event code (8 = On, 9 = Off unless data2 = 0)
+<span class="lineNum">      60 </span>            :          * \param data1 the first data byte (holding the note number)
+<span class="lineNum">      61 </span>            :          * \param data2 the second data byte (holding the velocity)
+<span class="lineNum">      62 </span>            :          * \param tick_time, the MIDI tick time of the event.
+<span class="lineNum">      63 </span>            :          */
+<span class="lineNum">      64 </span>            :         void addNoteEvent(uint8_t code, uint8_t data1, uint8_t data2, intmax_t tick_time);
+<span class="lineNum">      65 </span>            :         void popEvent();
+<span class="lineNum">      66 </span>            :         bool emptyList();
+<span class="lineNum">      67 </span>            :         bool getBool();
+<span class="lineNum">      68 </span>            : private:
+<span class="lineNum">      69 </span>            :         void addEvent(MIDIEvent e);
+<span class="lineNum">      70 </span>            :         bool testBool;
+<span class="lineNum">      71 </span>            :         intmax_t ticks_per_beat_;
+<span class="lineNum">      72 </span>            :         ConstIteratorType iterator;
+<span class="lineNum">      73 </span>            :         std::forward_list&lt;MIDIEvent&gt; eventList;
+<span class="lineNum">      74 </span>            :         // TODO
+<span class="lineNum">      75 </span>            : };
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span>            : /** A list of tracks. */
+<span class="lineNum">      78 </span>            : typedef std::list&lt;Track&gt; TrackListType;
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

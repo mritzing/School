@@ -1,0 +1,179 @@
+Start testing: Oct 09 23:33 UTC
+----------------------------------------------------------
+1/9 Testing: 00_Install
+1/9 Test: 00_Install
+Command: "/usr/bin/cmake" "--build" "/vagrant" "--target" "install"
+Directory: /vagrant
+"00_Install" start time: Oct 09 23:33 UTC
+Output:
+----------------------------------------------------------
+[ 57%] Built target unittests
+[ 85%] Built target synthesizer
+[ 92%] Built target synth
+[100%] Built target compare
+Install the project...
+-- Install configuration: ""
+-- Installing: /vagrant/bin/synth
+-- Installing: /vagrant/bin/unittests
+-- Up-to-date: /vagrant/bin/compare
+<end of output>
+Test time =   0.66 sec
+----------------------------------------------------------
+Test Passed.
+"00_Install" end time: Oct 09 23:33 UTC
+"00_Install" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/9 Testing: unittests
+2/9 Test: unittests
+Command: "/vagrant/unittests"
+Directory: /vagrant
+"unittests" start time: Oct 09 23:33 UTC
+Output:
+----------------------------------------------------------
+Parsing MIDI file failed.
+Parsing MIDI file succeeded.
+Parsing MIDI file succeeded.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+unittests is a Catch v1.10.0 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+Signal tests
+-------------------------------------------------------------------------------
+/vagrant/signal_test.cpp:7
+...............................................................................
+
+/vagrant/signal_test.cpp:7: FAILED:
+  {Unknown expression after the reported line}
+with expansion:
+
+due to a fatal error condition:
+  SIGABRT - Abort (abnormal termination) signal
+
+===============================================================================
+test cases: 10 |  9 passed | 1 failed
+assertions: 24 | 23 passed | 1 failed
+
+<end of output>
+Test time =   0.20 sec
+----------------------------------------------------------
+Test Failed.
+"unittests" end time: Oct 09 23:33 UTC
+"unittests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/9 Testing: test0
+3/9 Test: test0
+Command: "/usr/bin/cmake" "-DCOMPARE_EXE_FILE=/vagrant/bin/compare" "-DEXE_FILE=/vagrant/bin/synth" "-DINPUT_FILE=/vagrant/tests/test0.mid" "-DOUTPUT_FILE=test0" "-DERR_FILE=test0.stderr" "-DOUT_FILE=test0.stdout" "-DTEST_FILE=/vagrant/tests/test0-0.wav" "-P" "/vagrant/tests/Test.cmake"
+Directory: /vagrant/tests
+"test0" start time: Oct 09 23:33 UTC
+Output:
+----------------------------------------------------------
+Files identical.
+<end of output>
+Test time =   6.48 sec
+----------------------------------------------------------
+Test Passed.
+"test0" end time: Oct 09 23:33 UTC
+"test0" time elapsed: 00:00:06
+----------------------------------------------------------
+
+4/9 Testing: test1
+4/9 Test: test1
+Command: "/usr/bin/cmake" "-DCOMPARE_EXE_FILE=/vagrant/bin/compare" "-DEXE_FILE=/vagrant/bin/synth" "-DINPUT_FILE=/vagrant/tests/test1.mid" "-DOUTPUT_FILE=test1" "-DERR_FILE=test1.stderr" "-DOUT_FILE=test1.stdout" "-DTEST_FILE=/vagrant/tests/test1-0.wav" "-P" "/vagrant/tests/Test.cmake"
+Directory: /vagrant/tests
+"test1" start time: Oct 09 23:33 UTC
+Output:
+----------------------------------------------------------
+Files identical.
+<end of output>
+Test time =   6.40 sec
+----------------------------------------------------------
+Test Passed.
+"test1" end time: Oct 09 23:33 UTC
+"test1" time elapsed: 00:00:06
+----------------------------------------------------------
+
+5/9 Testing: test2
+5/9 Test: test2
+Command: "/usr/bin/cmake" "-DCOMPARE_EXE_FILE=/vagrant/bin/compare" "-DEXE_FILE=/vagrant/bin/synth" "-DINPUT_FILE=/vagrant/tests/test2.mid" "-DOUTPUT_FILE=test2" "-DERR_FILE=test2.stderr" "-DOUT_FILE=test2.stdout" "-DTEST_FILE=/vagrant/tests/test2-0.wav" "-P" "/vagrant/tests/Test.cmake"
+Directory: /vagrant/tests
+"test2" start time: Oct 09 23:33 UTC
+Output:
+----------------------------------------------------------
+Files identical.
+<end of output>
+Test time =   6.52 sec
+----------------------------------------------------------
+Test Passed.
+"test2" end time: Oct 09 23:34 UTC
+"test2" time elapsed: 00:00:06
+----------------------------------------------------------
+
+6/9 Testing: test3
+6/9 Test: test3
+Command: "/usr/bin/cmake" "-DCOMPARE_EXE_FILE=/vagrant/bin/compare" "-DEXE_FILE=/vagrant/bin/synth" "-DINPUT_FILE=/vagrant/tests/test3.mid" "-DOUTPUT_FILE=test3" "-DERR_FILE=test3.stderr" "-DOUT_FILE=test3.stdout" "-DTEST_FILE=/vagrant/tests/test3-0.wav" "-P" "/vagrant/tests/Test.cmake"
+Directory: /vagrant/tests
+"test3" start time: Oct 09 23:34 UTC
+Output:
+----------------------------------------------------------
+Files identical.
+<end of output>
+Test time =   6.44 sec
+----------------------------------------------------------
+Test Passed.
+"test3" end time: Oct 09 23:34 UTC
+"test3" time elapsed: 00:00:06
+----------------------------------------------------------
+
+7/9 Testing: test4
+7/9 Test: test4
+Command: "/usr/bin/cmake" "-DCOMPARE_EXE_FILE=/vagrant/bin/compare" "-DEXE_FILE=/vagrant/bin/synth" "-DINPUT_FILE=/vagrant/tests/test4.mid" "-DOUTPUT_FILE=test4" "-DERR_FILE=test4.stderr" "-DOUT_FILE=test4.stdout" "-DTEST_FILE=/vagrant/tests/test4-0.wav" "-P" "/vagrant/tests/Test.cmake"
+Directory: /vagrant/tests
+"test4" start time: Oct 09 23:34 UTC
+Output:
+----------------------------------------------------------
+Files identical.
+<end of output>
+Test time =   6.63 sec
+----------------------------------------------------------
+Test Passed.
+"test4" end time: Oct 09 23:34 UTC
+"test4" time elapsed: 00:00:06
+----------------------------------------------------------
+
+8/9 Testing: test5
+8/9 Test: test5
+Command: "/usr/bin/cmake" "-DCOMPARE_EXE_FILE=/vagrant/bin/compare" "-DEXE_FILE=/vagrant/bin/synth" "-DINPUT_FILE=/vagrant/tests/test5.mid" "-DOUTPUT_FILE=test5" "-DERR_FILE=test5.stderr" "-DOUT_FILE=test5.stdout" "-DTEST_FILE=/vagrant/tests/test5-0.wav" "-P" "/vagrant/tests/Test.cmake"
+Directory: /vagrant/tests
+"test5" start time: Oct 09 23:34 UTC
+Output:
+----------------------------------------------------------
+Files identical.
+<end of output>
+Test time =   6.68 sec
+----------------------------------------------------------
+Test Passed.
+"test5" end time: Oct 09 23:34 UTC
+"test5" time elapsed: 00:00:06
+----------------------------------------------------------
+
+9/9 Testing: test6
+9/9 Test: test6
+Command: "/usr/bin/cmake" "-DCOMPARE_EXE_FILE=/vagrant/bin/compare" "-DEXE_FILE=/vagrant/bin/synth" "-DINPUT_FILE=/vagrant/tests/test6.mid" "-DOUTPUT_FILE=test6" "-DERR_FILE=test6.stderr" "-DOUT_FILE=test6.stdout" "-DTEST_FILE=/vagrant/tests/test6-0.wav" "-P" "/vagrant/tests/Test.cmake"
+Directory: /vagrant/tests
+"test6" start time: Oct 09 23:34 UTC
+Output:
+----------------------------------------------------------
+Files identical.
+<end of output>
+Test time =   6.57 sec
+----------------------------------------------------------
+Test Passed.
+"test6" end time: Oct 09 23:34 UTC
+"test6" time elapsed: 00:00:06
+----------------------------------------------------------
+
+End testing: Oct 09 23:34 UTC
